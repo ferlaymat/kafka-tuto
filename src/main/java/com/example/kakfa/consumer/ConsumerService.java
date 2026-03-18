@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class ConsumerService {
     private final String TOPIC_NAME = "topicObj";
+
+    
     @KafkaListener(topics = TOPIC_NAME, groupId = "kafkaGroupId")
     public void consumeEvent(ObjEvent event, Acknowledgment ack){
         System.out.println("##################################");
