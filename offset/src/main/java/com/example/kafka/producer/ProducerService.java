@@ -1,7 +1,7 @@
-package com.example.kakfa.producer;
+package com.example.kafka.producer;
 
-import com.example.kakfa.common.TopicConstant;
-import com.example.kakfa.event.ObjEvent;
+import com.example.kafka.common.TopicConstant;
+import com.example.kafka.event.ObjEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;

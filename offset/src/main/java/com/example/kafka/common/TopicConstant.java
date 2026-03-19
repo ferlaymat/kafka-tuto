@@ -1,4 +1,4 @@
-package com.example.kakfa.common;
+package com.example.kafka.common;
 
 public class TopicConstant {
 

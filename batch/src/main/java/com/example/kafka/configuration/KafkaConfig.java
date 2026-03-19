@@ -1,6 +1,6 @@
-package com.example.kakfa.configuration;
+package com.example.kafka.configuration;
 
-import com.example.kakfa.common.TopicConstant;
+import com.example.kafka.common.TopicConstant;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

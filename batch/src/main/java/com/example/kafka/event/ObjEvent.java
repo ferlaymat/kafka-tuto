@@ -1,4 +1,4 @@
-package com.example.kakfa.event;
+package com.example.kafka.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

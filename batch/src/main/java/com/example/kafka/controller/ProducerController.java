@@ -1,6 +1,6 @@
-package com.example.kakfa.controller;
+package com.example.kafka.controller;
 
-import com.example.kakfa.producer.ProducerService;
+import com.example.kafka.producer.ProducerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
