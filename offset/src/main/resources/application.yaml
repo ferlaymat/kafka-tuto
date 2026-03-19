@@ -1,0 +1,44 @@
+spring:
+  kafka:
+    listener:
+      #ack-mode: RECORD        # commit after each msg (by default when auto-commit is disabled)
+      #ack-mode: BATCH         # commit after each batch returned by poll()
+      #ack-mode: MANUAL        # commit when ack.acknowledge()is called — async
+      ack-mode: MANUAL_IMMEDIATE # commit immediately and synchrony when ack.acknowledge()is called
+
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      #acks: '0'     #no waiting for acknowledgement. could lose messages even is the broker is ok
+      #acks: '1'     #waiting for leader acknowledgement. could lose messages if leader crash before sync
+      acks: all #waiting for all ISR acknowledgements. could not lose messages(in theory)
+      retries: 2147483647
+      properties:
+        enable.idempotence: true
+        max.in.flight.requests.per.connection: 5
+    consumer:
+      bootstrap-servers: localhost:9092
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      group-id: offsetGroupId
+      enable-auto-commit: false #disable the periodical autocommit
+      auto-offset-reset: earliest #restart from the earliest not committed offset
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: com.example.kakfa.event
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, prometheus
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+server:
+  port: 8083
