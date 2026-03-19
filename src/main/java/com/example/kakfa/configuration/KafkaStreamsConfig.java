@@ -14,9 +14,9 @@ import org.springframework.kafka.support.serializer.JacksonJsonSerde;
 @EnableKafkaStreams
 public class KafkaStreamsConfig {
     /**
-     * This bean will consume automatically the stream of events.
-     * It will be instantiate at the launch of the app.
-     * Here we specified which type of object the consumer has to deserialize
+     * This bean automatically consumes the stream of events.
+     * It is instantiated at application startup.
+     * Here we specify which type of object the consumer must deserialize.
      */
 
     @Bean

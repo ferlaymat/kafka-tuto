@@ -10,11 +10,15 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class ConsumerService {
     private final String TOPIC_NAME = "topicObj";
-
+    /**
+     * We use Kafkalistener here to subscribe a specific topic.
+     * A manual acknowledge is done here because global autocommit is disabled due to KStream.
+     */
     
     @KafkaListener(topics = TOPIC_NAME, groupId = "kafkaGroupId")
     public void consumeEvent(ObjEvent event, Acknowledgment ack){
         System.out.println("##################################");
         System.out.println(event);
+        ack.acknowledge();
     }
 }
