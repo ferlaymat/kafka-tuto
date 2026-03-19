@@ -1,14 +1,31 @@
-This repository is split into 3 sub-projects which all both give an example on how to use kafka. They do not cover all the cases but it s an easy waay to start with this tool. 
-Requirements: Java 21, Maven and Docker
-To run the app, please launch firstly the docker compose file available at the root folder. Then, in a second step, launch the app throught the command line: mvn spring-boot:run
+# Kafka Learning Projects
 
-Here,  you'll find the main url:
+This repository is split into 3 sub-projects, each providing an example of how to use Kafka.
+They do not cover all use cases, but offer an easy way to get started with this tool.
 
-standalone: http://localhost:8080
-producer: http://localhost:8081
-consumer: http://localhost:8082
+## Requirements
+- Java 21
+- Maven
+- Docker
 
-Kafka broker: http://localhost:9092
-Metrics:
- * Prometheus: http://localhost:8080/actuator/prometheus
- * Kafka-ui: http://localhost:8090
+## Getting Started
+
+First, launch the Docker Compose file available at the root folder:
+```bash
+docker compose up -d
+```
+Then, start the app via the command line:
+```bash
+mvn spring-boot:run
+```
+
+## URLs
+
+| Service | URL |
+|---|---|
+| Standalone | http://localhost:8080 |
+| Producer | http://localhost:8081 |
+| Consumer | http://localhost:8082 |
+| Kafka Broker | http://localhost:9092 |
+| Prometheus | http://localhost:8080/actuator/prometheus |
+| Kafka UI | http://localhost:8090 |
