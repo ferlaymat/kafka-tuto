@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>kakfa</artifactId>
+	<artifactId>kafka-standalone</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name/>
 	<description/>
