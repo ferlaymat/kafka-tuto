@@ -13,10 +13,20 @@ public class KafkaConfig {
      */
 
 
+    /**
+     * A topic is a logical for which one the physical representation is a partition.
+     * It exists a relation between consumer and partition. Inside the same group,
+     * the partition can be consumer at most by one consumer. that means, if you want
+     * to increase the performance, you can parallelize the consumption by adding more
+     * partitions and consumers.
+     * Replicas correspond to the redundancy of your partition on other brokers to insure
+     * the continuity in case of the main broker was not available.
+     */
     @Bean
     public NewTopic objTopic(){
         return TopicBuilder.name("topicObj")
                 .partitions(2)
+               // .replicas(3)
                 .build();
     }
 

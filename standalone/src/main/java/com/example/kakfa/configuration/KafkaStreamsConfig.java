@@ -25,7 +25,11 @@ public class KafkaStreamsConfig {
 
         KStream<String, ObjEvent> stream = builder.stream("topicObjStream",
                 Consumed.with(Serdes.String(), objEventSerde));
-        stream.peek((s, objEvent) -> System.out.println("Event:"+objEvent));
+        //'peek' let chained the stream. If you want to consume directly here, use 'foreach'
+        stream.peek((s, objEvent) -> System.out.println("Event:"+objEvent))
+        // if you want to forward the event to another topic, use the command 'to'
+        //        .to("another-topic");
+        ;
         return stream;
     }
 }

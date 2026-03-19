@@ -19,6 +19,7 @@ public class ConsumerService {
     public void consumeEvent(ObjEvent event, Acknowledgment ack){
         System.out.println("##################################");
         System.out.println(event);
+        //manual acknowledge
         ack.acknowledge();
     }
 }
