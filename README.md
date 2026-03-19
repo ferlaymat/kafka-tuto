@@ -26,7 +26,7 @@ mvn spring-boot:run
 | Standalone | http://localhost:8080 |Standalone project to produce/consume a topic and give KStream example |
 | Producer | http://localhost:8081 |Simple project to produce a topic|
 | Consumer | http://localhost:8082 |Simple project to consume a topic|
-| offset | http://localhost:8083 |Explain some configuration and give at-least-once/at-most-once examples to manage offset acknowledgement|
+| offset | http://localhost:8083 |Explain some configuration and give at-least-once/at-most-once examples to manage offset acknowledgment|
 | batch | http://localhost:8084 |Without Batching, each send is directly provided to the broker.1 message equals 1 round trip in the network. With batching, messages are stacked in a buffert and only 1 packet is sent|
 | Kafka Broker | http://localhost:9092 | NA |
 | Prometheus | http://localhost:8080/actuator/prometheus | NA |

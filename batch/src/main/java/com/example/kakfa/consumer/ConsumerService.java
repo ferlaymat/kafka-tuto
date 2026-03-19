@@ -12,18 +12,18 @@ import org.springframework.stereotype.Service;
 public class ConsumerService {
 
     /**
-     * We use Kafkalistener here to subscribe a specific topic.
+     * We use Kafkalistener here to subscribe to a specific topic.
      */
     
     @KafkaListener(topics = TopicConstant.TOPIC_NAME, groupId = "kafkaGroupId")
     public void consumeEvent(ObjEvent event, Acknowledgment ack){
 
-        //event is treat before the acknowledgment -> case at-least-once
+        //event is treated before the acknowledgment -> case at-least-once
         System.out.println(event);
-        //manual acknowledge
+        //manual acknowledgment
         ack.acknowledge();
 
-        //event is treat after the acknowledgment -> case at-most-once
+        //event is treated after the acknowledgment -> case at-most-once
         //in this case, if it fails, the message is definitively lost
         //System.out.println(event);
     }

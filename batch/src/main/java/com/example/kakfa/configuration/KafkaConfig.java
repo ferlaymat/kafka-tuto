@@ -17,8 +17,8 @@ public class KafkaConfig {
     @Bean
     public NewTopic objTopic() {
         return TopicBuilder.name(TopicConstant.TOPIC_NAME)
-                //by default a topic is keep 7 days in Kafka. You can modify this
-                //by specify the delay of retention
+                //by default a topic is kept 7 days in Kafka. You can modify this
+                //by specifying the delay of retention
                 .config("retention.ms", "604800000" )
                 .build();
     }

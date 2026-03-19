@@ -1,0 +1,38 @@
+spring:
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      retries: 10
+      properties:
+        retry.backoff.ms: 1000          # wait 1s between each retry
+        delivery.timeout.ms: 120000     # timeout total including retries (2 min)
+        request.timeout.ms: 30000       # timeout for one send
+        enable.idempotence: true
+
+    consumer:
+      bootstrap-servers: localhost:9092
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      group-id: offsetGroupId
+      enable-auto-commit: false #disable the periodical autocommit
+      auto-offset-reset: earliest #restart from the earliest not committed offset
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: com.example.kakfa.event
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, prometheus
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+server:
+  port: 8085

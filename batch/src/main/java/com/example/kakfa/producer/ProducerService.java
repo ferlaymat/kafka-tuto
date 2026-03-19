@@ -41,10 +41,10 @@ public class ProducerService {
             UUID id = UUID.randomUUID();
             ObjEvent event = new ObjEvent(id, String.format("message: %s", id));
             CompletableFuture<SendResult<String, ObjEvent>> future = kafkaTemplate.send(TopicConstant.TOPIC_NAME, event);
-            // Excute action of the future when it s complete
+            // Excute action of the future when is complete
             future.whenComplete((result, ex) -> {
                 if (ex != null) {
-                    System.err.println("send msg failed : " + ex.getMessage());
+                    System.err.println("sending msg failed : " + ex.getMessage());
                 } else {
                     RecordMetadata metadata = result.getRecordMetadata();
                     System.out.printf("send → partition=%d offset=%d%n",
@@ -56,7 +56,7 @@ public class ProducerService {
         System.out.println("#################################");
         System.out.println("######### before flush  #########");
         System.out.println("#################################");
-        kafkaTemplate.flush(); //bloc all msg until all msg had been sent
+        kafkaTemplate.flush(); //blocs all messages until all messages have been sent
         System.out.println("#################################");
         System.out.println("######### after flush  #########");
         System.out.println("#################################");

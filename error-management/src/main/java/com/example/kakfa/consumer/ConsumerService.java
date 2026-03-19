@@ -13,14 +13,13 @@ public class ConsumerService {
 
     /**
      * We use Kafkalistener here to subscribe to a specific topic.
-     * A manual acknowledge is done here because global autocommit is disabled due to KStream.
+     * We voluntarily do not set the acknowledgment to provoke an exception
      */
     
     @KafkaListener(topics = TopicConstant.TOPIC_NAME, groupId = "kafkaGroupId")
     public void consumeEvent(ObjEvent event, Acknowledgment ack){
         System.out.println("##################################");
-        System.out.println(event);
-        //manual acknowledge
-        ack.acknowledge();
+        System.out.println("Throw exception");
+
     }
 }
