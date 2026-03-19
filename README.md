@@ -1,6 +1,6 @@
 # Kafka Learning Projects
 
-This repository is split into 3 sub-projects, each providing an example of how to use Kafka.
+This repository is split into several sub-projects, each providing an example of how to use Kafka.
 They do not cover all use cases, but offer an easy way to get started with this tool.
 
 ## Requirements
@@ -19,13 +19,15 @@ Then, start the app via the command line:
 mvn spring-boot:run
 ```
 
-## URLs
+## Projects and URLs
 
-| Service | URL |
-|---|---|
-| Standalone | http://localhost:8080 |
-| Producer | http://localhost:8081 |
-| Consumer | http://localhost:8082 |
-| Kafka Broker | http://localhost:9092 |
-| Prometheus | http://localhost:8080/actuator/prometheus |
-| Kafka UI | http://localhost:8090 |
+| Service | URL | Use case |
+|---|---|---|
+| Standalone | http://localhost:8080 |Standalone project to produce/consume a topic and give KStream example |
+| Producer | http://localhost:8081 |Simple project to produce a topic|
+| Consumer | http://localhost:8082 |Simple project to consume a topic|
+| offset | http://localhost:8083 |Explain some configuration and give at-least-once/at-most-once examples to manage offset acknowledgement|
+| batch | http://localhost:8084 |Without Batching, each send is directly provided to the broker.1 message equals 1 round trip in the network. With batching, messages are stacked in a buffert and only 1 packet is sent|
+| Kafka Broker | http://localhost:9092 | NA |
+| Prometheus | http://localhost:8080/actuator/prometheus | NA |
+| Kafka UI | http://localhost:8090 | NA |

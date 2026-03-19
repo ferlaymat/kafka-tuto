@@ -29,7 +29,9 @@ public class ProducerService {
     public void senObjMessage() {
         UUID id = UUID.randomUUID();
         ObjEvent event = new ObjEvent(id, String.format("message: %s", id));
-        kafkaTemplate.send(TopicConstant.TOPIC_NAME, event);
+        //as we have multiple partitions, the order between them is not insure. Only insure inside a topic.
+        //we add a key to ensure that all messages will be sent to the same partition.
+        kafkaTemplate.send(TopicConstant.TOPIC_NAME, "key-user", event);
     }
 
     public void senObjMessageForStream() {
