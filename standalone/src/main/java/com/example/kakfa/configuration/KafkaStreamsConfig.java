@@ -1,5 +1,6 @@
 package com.example.kakfa.configuration;
 
+import com.example.kakfa.common.TopicConstant;
 import com.example.kakfa.event.ObjEvent;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.StreamsBuilder;
@@ -23,7 +24,7 @@ public class KafkaStreamsConfig {
     public KStream<String, ObjEvent> kStream(StreamsBuilder builder) {
         JacksonJsonSerde<ObjEvent> objEventSerde = new JacksonJsonSerde<>(ObjEvent.class);
 
-        KStream<String, ObjEvent> stream = builder.stream("topicObjStream",
+        KStream<String, ObjEvent> stream = builder.stream(TopicConstant.TOPIC_NAME_STREAM,
                 Consumed.with(Serdes.String(), objEventSerde));
         //'peek' let chained the stream. If you want to consume directly here, use 'foreach'
         stream.peek((s, objEvent) -> System.out.println("Event:"+objEvent))

@@ -1,5 +1,6 @@
 package com.example.kakfa.producer;
 
+import com.example.kakfa.common.TopicConstant;
 import com.example.kakfa.event.ObjEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.serialization.Serdes;
@@ -18,8 +19,6 @@ import java.util.UUID;
 @Slf4j
 public class ProducerService {
     private KafkaTemplate<String, ObjEvent> kafkaTemplate;
-    private final String TOPIC_NAME = "topicObj";
-    private final String TOPIC_NAME_STREAM = "topicObjStream";
     private final KStream<String, ObjEvent> kStream;
 
     public ProducerService(KafkaTemplate<String, ObjEvent> kafkaTemplate,KStream<String, ObjEvent> kStream) {
@@ -30,14 +29,14 @@ public class ProducerService {
     public void senObjMessage() {
         UUID id = UUID.randomUUID();
         ObjEvent event = new ObjEvent(id, String.format("message: %s", id));
-        kafkaTemplate.send(TOPIC_NAME, event);
+        kafkaTemplate.send(TopicConstant.TOPIC_NAME, event);
     }
 
     public void senObjMessageForStream() {
         for(int i =0; i <100; i++) {
             UUID id = UUID.randomUUID();
             ObjEvent event = new ObjEvent(id, String.format("message: %s", id));
-            kafkaTemplate.send(TOPIC_NAME_STREAM, event);
+            kafkaTemplate.send(TopicConstant.TOPIC_NAME_STREAM, event);
         }
     }
 

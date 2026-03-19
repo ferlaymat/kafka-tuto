@@ -1,5 +1,6 @@
 package com.example.kakfa.configuration;
 
+import com.example.kakfa.common.TopicConstant;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +25,7 @@ public class KafkaConfig {
      */
     @Bean
     public NewTopic objTopic(){
-        return TopicBuilder.name("topicObj")
+        return TopicBuilder.name(TopicConstant.TOPIC_NAME)
                 .partitions(2)
                // .replicas(3)
                 .build();
@@ -32,7 +33,7 @@ public class KafkaConfig {
 
     @Bean
     public NewTopic objTopicStream(){
-        return TopicBuilder.name("topicObjStream")
+        return TopicBuilder.name(TopicConstant.TOPIC_NAME_STREAM)
                 .build();
     }
 }
