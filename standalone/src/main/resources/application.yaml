@@ -6,7 +6,7 @@ spring:
       application-id: ktable-demo
       bootstrap-servers: localhost:9092
       properties:
-        processing.guarantee: at_least_once  # exactly_once_v2 requiert un broker stable
+        processing.guarantee: at_least_once # exactly_once_v2 requiert un broker stable
     producer:
       bootstrap-servers: localhost:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
@@ -17,12 +17,12 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       group-id: kafkaGroupId
-      enable-auto-commit: false  # uniquement pour @KafkaListener
+      enable-auto-commit: false # uniquement pour @KafkaListener
       properties:
         spring:
           json:
             trusted:
-              packages: com.example.kakfa.event
+              packages: com.example.kafka.event
 
 management:
   endpoints:

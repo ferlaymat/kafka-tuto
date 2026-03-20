@@ -1,46 +1,64 @@
 package com.example.kafka.consumer;
 
+import com.example.kafka.common.TopicConstant;
+import com.example.kafka.event.ObjEvent;
+import org.apache.kafka.common.TopicPartition;
 import org.springframework.kafka.annotation.KafkaHandler;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.annotation.TopicPartition;
 import org.springframework.kafka.listener.ConsumerSeekAware;
+import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 @Component
-@KafkaListener(topics = TopicConstant.TOPIC_NAME, groupId = "mon-groupe")
+@KafkaListener(topics = TopicConstant.TOPIC_NAME_RESET, groupId = "kafkaGroupId")
 public class ObjEventConsumer implements ConsumerSeekAware {
 
     private ConsumerSeekCallback seekCallback;
+    private Set<TopicPartition> assignedPartitions = new HashSet<>();
+    private volatile boolean seekToBeginningRequested = false; //volatile to be visible between threads
 
-    // appelé une seule fois après l'assignation des partitions
     @Override
     public void onPartitionsAssigned(
             Map<TopicPartition, Long> assignments,
             ConsumerSeekCallback callback) {
-        this.seekCallback = callback;  // garder la référence pour seek ultérieur
+        this.seekCallback = callback;
+        this.assignedPartitions = assignments.keySet(); // keep partitions in memory
+    }
+
+    @Override
+    public void onPartitionsRevoked(Collection<TopicPartition> partitions) {
+        assignedPartitions.removeAll(partitions); // clean all redistributions
     }
 
     @KafkaHandler
-    public void consume(ObjEvent event) {
-        System.out.println(event);
+    public void consume(ObjEvent event, Acknowledgment ack) {
+        //check if we need to replay
+        if (seekToBeginningRequested) {
+            replayFromBeginning();
+            seekToBeginningRequested = false;
+        }
+        //consume the last sent event
+        System.out.println(String.format("Replay Consume event:%s", event));
+        ack.acknowledge();
     }
 
-    // --- méthodes de seek appelables depuis l'extérieur ---
 
-    // rejouer depuis le début
+    //set the flag
+    public void requestSeekToBeginning() {
+        seekToBeginningRequested = true;
+    }
+
+    //replay all topics for each partitions
     public void replayFromBeginning() {
-        seekCallback.seekToBeginning(seekCallback.getAssignedPartitions());
+        assignedPartitions.forEach(tp ->
+                seekCallback.seekToBeginning(tp.topic(), tp.partition())
+        );
     }
 
-    // sauter tous les messages en attente
-    public void skipToEnd() {
-        seekCallback.seekToEnd(seekCallback.getAssignedPartitions());
-    }
 
-    // aller à un offset précis sur une partition précise
-    public void seekToOffset(String topic, int partition, long offset) {
-        seekCallback.seek(topic, partition, offset);
-    }
 }

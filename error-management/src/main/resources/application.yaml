@@ -6,9 +6,9 @@ spring:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       retries: 10
       properties:
-        retry.backoff.ms: 1000          # wait 1s between each retry
-        delivery.timeout.ms: 120000     # timeout total including retries (2 min)
-        request.timeout.ms: 30000       # timeout for one send
+        retry.backoff.ms: 1000 # wait 1s between each retry
+        delivery.timeout.ms: 120000 # timeout total including retries (2 min)
+        request.timeout.ms: 30000 # timeout for one send
         enable.idempotence: true
 
     consumer:
@@ -22,7 +22,7 @@ spring:
         spring:
           json:
             trusted:
-              packages: com.example.kakfa.event
+              packages: com.example.kafka.event
 
 management:
   endpoints:

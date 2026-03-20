@@ -22,5 +22,11 @@ public class ProducerController {
         producerService.senObjMessage();
     }
 
+    @Operation(summary = "Send a message by Kafka", description = "Produce and send multiple messages")
+    @GetMapping("/multi")
+    public void sendMessageMulti() {
+        producerService.senObjMessageMulti();
+    }
+
 
 }

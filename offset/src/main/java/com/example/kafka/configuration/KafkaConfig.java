@@ -23,5 +23,11 @@ public class KafkaConfig {
                 .build();
     }
 
+    @Bean
+    public NewTopic objTopicReset() {
+        return TopicBuilder.name(TopicConstant.TOPIC_NAME_RESET)
+                .build();
+    }
+
 
 }

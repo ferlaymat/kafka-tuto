@@ -21,6 +21,16 @@ public class ProducerService {
         UUID id = UUID.randomUUID();
         ObjEvent event = new ObjEvent(id, String.format("message: %s", id));
         kafkaTemplate.send(TopicConstant.TOPIC_NAME, event);
+
+    }
+
+    public void senObjMessageMulti() {
+        for(int i = 0; i< 10; i++) {
+            UUID id = UUID.randomUUID();
+            ObjEvent event = new ObjEvent(id, String.format("message: %s", id));
+            kafkaTemplate.send(TopicConstant.TOPIC_NAME, event);
+            kafkaTemplate.send(TopicConstant.TOPIC_NAME_RESET, event);
+        }
     }
 
 
