@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>kafka-standalone</artifactId>
+	<artifactId>kafka-error-management</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name/>
 	<description/>

@@ -23,12 +23,14 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       group-id: offsetGroupId
       enable-auto-commit: false #disable the periodical autocommit
-      auto-offset-reset: earliest #restart from the earliest not committed offset
+      #auto-offset-reset: earliest #seekToBeginning implicit - restart from the earliest not committed offset
+      # auto-offset-reset: latest   # seekToEnd implicit (default)
+      # auto-offset-reset: none     # exception if no committed offset
       properties:
         spring:
           json:
             trusted:
-              packages: com.example.kakfa.event
+              packages: com.example.kafka.event
 
 management:
   endpoints:

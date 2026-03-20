@@ -13,6 +13,6 @@ public class KafkaConsumer {
 
     @KafkaListener(topics = "wikiTopic", groupId = "myGroup")
     public void consumeMsg(String msg) {
-        log.info(String.format("consume msg from wikiTopic: %s", msg));
+        log.info(String.format("consuming msg from wikiTopic: %s", msg));
     }
 }

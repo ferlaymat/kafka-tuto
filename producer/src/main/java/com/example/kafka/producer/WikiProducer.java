@@ -17,7 +17,7 @@ public class WikiProducer {
     }
 
     public void sendMessage(String msg){
-        log.info(String.format("Send message: %s",msg));
+        log.info(String.format("Sending message: %s",msg));
         kafkaTemplate.send("wikiTopic",msg);
     }
 
